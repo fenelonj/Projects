@@ -7,3 +7,7 @@ In this project I had to develop a model that would accurately depict the motion
 
 # Tunneling Project
 This is a folder containing all of the contents I created to model the physical phenomenon known as quantum tunneling. In this folder there is both a Julia notebook and a python notebook, both notebooks deliver the exact same results, this is just a demonstration of both languages solving the same problem. In the notebooks and PDF file in this folder are detailed derivations to the mathematical expressions used to carry out this type of simulation. You can also find GIFs of a couple of the scenarios modeled in the notebook. This is a project that involved solving ODES, numerically modeling the ODEs, probability, and data visualization.
+
+# Dash Project
+
+This is a folder containing a simple data visualization example using plotly's dash library. By running the python script and launching the local server in the browser, you can observe the CO2 emissions of every country in the world from 1990-2019. Sample images of the page can be found in this folder.
