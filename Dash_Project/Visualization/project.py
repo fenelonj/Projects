@@ -1,5 +1,6 @@
 from dash import Dash, dcc, html, Input, Output
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 
 app = Dash(__name__)
@@ -25,12 +26,22 @@ app.layout = html.Div(className = "body", children = [
     
     dcc.Graph(
         id = "Graph",
+    ),
+    
+    html.Div(children=[
+        html.Label("Compare CO2 outputs between countries"),
+        dcc.Dropdown(countries, ["United States", "Mexico"], multi=True, id = "inputs")
+    ], className = "dropdown"),
+    
+    dcc.Graph(
+        id = "Graph2"
     )
 ])
 
 @app.callback(
     Output("Graph", "figure"),
-    Input("input-selection", "value"))
+    Input("input-selection", "value"),
+)
 
 def update_figure(selection):
 
@@ -38,9 +49,20 @@ def update_figure(selection):
                 labels={
                     selection: "Metric Tons Per Capita"   
                 }, 
-                title = "{} CO2 Emissions".format(selection))
-    
-    return figure                           
+                title = "{} CO2 Emissions".format(selection))   
+    return figure
 
+@app.callback(
+    Output("Graph2", "figure"),
+    Input("inputs", "value")
+)
+
+def figure2(selections):
+    figure2 = go.Figure(data = [
+    go.Bar(name = selections[0], x = data['Year'], y = data[selections[0]]),
+    go.Bar(name = selections[1], x = data['Year'], y = data[selections[1]])
+])    
+    return figure2
+    
 if __name__ == "__main__":
     app.run_server(debug=True)
